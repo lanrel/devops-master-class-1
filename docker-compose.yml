@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  devopsmasterclass:
+    image: devopsmasterclass
+    build:
+      context: .
+      dockerfile: ./Dockerfile
