@@ -1,0 +1,17 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+- task: TerraformTaskV3@3
+  inputs:
+    provider: 'aws'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/tree/master/projects/microservices/01-currency-exchange-microservice-basic/configuration/iaac/aws/kubernetes'
+    backendServiceAWS: 'aws-for-terraform'
+    backendAWSBucketName: 'myfirstterraform-backend-state-123'
+    backendAWSKey: 'dev-kubernetes-pipeline'
