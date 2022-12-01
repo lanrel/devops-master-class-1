@@ -1,0 +1,21 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+  - task: TerraformTaskV3@3
+    inputs:
+      provider: 'aws'
+      command: 'init'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/aws/kubernetes'
+      backendServiceAWS: 'aws-for-terraform'
+      backendAWSBucketName: 'myfirstterraform-backend-state-123'
+      backendAWSKey: 'kubernatenes-dev-tfstate'
+
+#first thing to do is to run terraform init - and configure backend in S3
+#second thing to do is run terraform apply which will update what we did above
+
